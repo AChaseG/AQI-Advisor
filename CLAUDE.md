@@ -7,7 +7,7 @@ Scheduled PowerShell script that pulls current AQI from the EPA AirNow API for t
 - Config: two locations defined by full US street address in the `$Locations` block at the top of the script.
 - Geocoding: addresses → US Census geocoder (free, no API key) → lat/long. Results cached to `geocode-cache.json` beside the script, so only the first run per address hits the geocoder.
 - Data: lat/long → AirNow current-observations endpoint. Returns one JSON entry per pollutant (PM2.5, O3, etc.), each with AQI and category name.
-- Formatting: worst-AQI pollutant is the headline per location, remaining pollutants listed as detail; category name maps to a colored Slack emoji.
+- Formatting: the worst-AQI observation sets the headline AQI, category and emoji per location (its `ParameterName` is not itself printed in the headline); the bracketed detail then lists *every* pollutant returned, including the headline one. Category name maps to a colored Slack emoji.
 - Delivery: single combined message POSTed to a Slack incoming webhook as a plain `{"text": "..."}` payload (Slack mrkdwn formatting).
 
 ## Configuration and secrets
